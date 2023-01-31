@@ -5,44 +5,41 @@ import java.util.LinkedList;
 public class MyMap {
 	
 	LinkedList<MyMapNode>[] data;
-	
-	@SuppressWarnings("unchecked")
+
 	public MyMap() {
 		data = new LinkedList[26];
 	}
-	
-	private int getIndex(char c) {
-		return c - 'a';
+
+	private int getIndex(String key) {
+		return Math.abs(key.hashCode() % 26);
 	}
-	
+
 	public void put(String key, int value) {
-		
-		int index = getIndex(key.charAt(0));
-		
-		if(data[index] == null) 
+		int index = getIndex(key);
+		if (data[index] == null) {
 			data[index] = new LinkedList<>();
-		
+		}
 		LinkedList<MyMapNode> bucket = data[index];
-		
-		for(MyMapNode node : bucket) {
-			if(node.key.equals(key)) {
+		for (MyMapNode node : bucket) {
+			if (node.key.equals(key)) {
 				node.value = value;
 				return;
 			}
 		}
+
 		bucket.addLast(new MyMapNode(key, value));
 	}
-	
+
 	public int get(String key) {
-		
-		int index = getIndex(key.charAt(0));
+		int index = getIndex(key);
 		LinkedList<MyMapNode> bucket = data[index];
-		if(bucket == null)
-			return 0;
-		for(MyMapNode node : bucket) {
-			
-			if(node.key.equals(key))
+		if (bucket == null) {
+	        	return 0;
+		}
+		for (MyMapNode node : bucket) {
+			if (node.key.equals(key)) {
 				return node.value;
+			}
 		}
 		return 0;
 	}
