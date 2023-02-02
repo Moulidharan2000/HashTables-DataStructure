@@ -15,10 +15,12 @@ public class Main {
 			int count = map.get(word);
 			map.put(word, count + 1);
 		}
+		map.removeWord("avoidable");
 		System.out.println("The frequency of 'Paranoids' is: " + map.get("Paranoids"));
 		System.out.println("The frequency of 'paranoid' is: " + map.get("paranoid"));
 		System.out.println("The frequency of 'because' is: " + map.get("because")); 
 		System.out.println("The frequency of 'they' is: " + map.get("they"));
 		System.out.println("The frequency of 'into' is: " + map.get("into"));
+		System.out.println("The frequency of 'avoidable' is: " + map.get("avoidable"));
 	}
 }

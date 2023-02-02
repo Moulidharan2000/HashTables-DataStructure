@@ -4,17 +4,18 @@ import java.util.LinkedList;
 
 public class MyMap {
 	
-	LinkedList<MyMapNode>[] data;
+	static LinkedList<MyMapNode>[] data;
 
 	public MyMap() {
 		data = new LinkedList[26];
 	}
 
-	private int getIndex(String key) {
+	private static int getIndex(String key) {
 		return Math.abs(key.hashCode() % 26);
 	}
 
 	public void put(String key, int value) {
+		
 		int index = getIndex(key);
 		if (data[index] == null) {
 			data[index] = new LinkedList<>();
@@ -29,8 +30,9 @@ public class MyMap {
 
 		bucket.addLast(new MyMapNode(key, value));
 	}
-
+	
 	public int get(String key) {
+		
 		int index = getIndex(key);
 		LinkedList<MyMapNode> bucket = data[index];
 		if (bucket == null) {
@@ -42,5 +44,16 @@ public class MyMap {
 			}
 		}
 		return 0;
+	}
+	
+	public void removeWord(String key) {
+		
+		int index = getIndex(key);
+		LinkedList<MyMapNode> bucket = data[index];
+		for(MyMapNode node : bucket) {
+			if(node.key.equals(key)) {
+				bucket.remove(node.value);
+			}
+		}
 	}
 }
